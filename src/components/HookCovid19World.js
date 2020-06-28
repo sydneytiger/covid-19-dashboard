@@ -1,28 +1,33 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import {base_url, countries} from '../constaints';
+import {countries} from '../constaints';
+import api from '../api';
+
 import CovidCountryCard from './CovidCountryCard';
 
 function HookCovid19World({selectedCountry = ''}) {
-  const [country, setCountry] = useState(selectedCountry);
+  const [country] = useState(selectedCountry);
   const [statistic, setStatistic] = useState([]);
 
   useEffect(() => {
-    axios.get(`${base_url}${countries}${country}`)
-      .then((resp) => {
-        let data = Array.isArray(resp.data) ? resp.data : [resp.data];
-        data = data.sort((a, b) => b.cases - a.cases).slice(0, 12);
-        setStatistic(data.sort((a, b) => b.cases - a.cases));
-      });
+    getDataForWorldwide();
   }, []);
+
+  const getDataForWorldwide = () => {
+    api.get(`${countries}${country}`)
+    .then( resp => {
+      let {data} = resp;
+      data = Array.isArray(resp.data) ? resp.data : [resp.data];
+      data = data.sort((a, b) => b.cases - a.cases).slice(0, 12);
+      setStatistic(data.sort((a, b) => b.cases - a.cases));
+    });
+  }
 
   return (
     <div className="container">
-        {
-          statistic.map(item => <div key={item.countryInfo.iso3}>
-            <CovidCountryCard data={item} /> </div>)
-        }
-
+      {
+        statistic.map(item => <div key={item.countryInfo.iso3}>
+          <CovidCountryCard data={item} /> </div>)
+      }
     </div>
   )
 }

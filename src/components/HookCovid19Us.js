@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import { base_url, us } from '../constaints';
+import api from '../api';
+import { us } from '../constaints';
 
 function HookCovid19Us({selectedState = ''}) {
-  const [usState, setusState] = useState(selectedState);
+  const [usState] = useState(selectedState);
   const [statistic, setStatistic] = useState([]);
 
   useEffect(() => {
-    axios.get(`${base_url}${us}${usState}`)
+    getDataForStates();
+  }, [])
+  
+  const getDataForStates = () => {
+    api.get(`${us}${usState}`)
     .then(resp => {
       const data = Array.isArray(resp.data) ? resp.data : [resp.data];
       setStatistic(data);
     })
-  }, [])
-  
+  }
   
   return (
     <div>
