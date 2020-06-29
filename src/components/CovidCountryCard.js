@@ -26,4 +26,4 @@ function CovidCountryCard({data}) {
   )
 }
 
-export default CovidCountryCard
+export default React.memo(CovidCountryCard)
