@@ -1,7 +1,7 @@
 import React, {useReducer, useEffect} from 'react'
 import CovidCountryCard from './CovidCountryCard';
-import {countries} from '../constaints';
-import Title from './Title';
+import {countries} from '../../constaints';
+import Title from '../Title';
 
 function Covid19World({selectedCountry = ''}) {
   const initState = {

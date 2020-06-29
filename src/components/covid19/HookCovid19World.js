@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {countries} from '../constaints';
+import {countries} from '../../constaints';
 
 import CovidCountryCard from './CovidCountryCard';
 

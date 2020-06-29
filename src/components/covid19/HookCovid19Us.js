@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { us } from '../constaints';
+import { us } from '../../constaints';
 
 function HookCovid19Us({selectedState = ''}) {
   const [usState] = useState(selectedState);

@@ -1,6 +1,7 @@
-import React, {useReducer, Context} from 'react'
+import React, {useReducer} from 'react'
 import NestedA from './NestedA';
 import NestedC from './NestedC';
+import Title from '../Title';
 
 export const CountContext = React.createContext();
 
@@ -22,12 +23,18 @@ function RootCounter() {
   const [count, dispatch] = useReducer(reducer, initCount);
 
   return (
-    <div>
-      <CountContext.Provider value={{count, dispatch}}>
-        <NestedA />
-        <NestedC />
-      </CountContext.Provider>
-    </div>
+    <>
+      <Title text="useContext + useReducer"></Title>
+      <div className="center">
+        <p>
+          Similar to Redux. useContext maps to redux store and useReducer maps to reducer.
+        </p>
+        <CountContext.Provider value={{count, dispatch}}>
+          <NestedA />
+          <NestedC />
+        </CountContext.Provider>
+      </div>
+    </>
   )
 }
 
