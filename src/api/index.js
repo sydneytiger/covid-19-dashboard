@@ -6,38 +6,44 @@ const apiCache = new ApiCache();
 const default_expire = 60 * 60 * 1000; // cache one hour
 
 const requestInterceptor = config => {
-  let { url, data, params} = config;
-  const key = getKey(url, data, params);
-
-  if (apiCache.hasCache(key)) {
-    const cacheObj = apiCache.getCache(key);
-    const currentTime = new Date().getTime();
-    
-    if(currentTime < cacheObj.expire){
-      console.log('serving cached data');
-      config.headers.cached = true;
-      config.data = apiCache.getCache(key).result;
-      return Promise.reject(config);
-    } else {
-      apiCache.clearCache(key);
+  if(config.method.toUpperCase() === 'GET'){
+    let { url, data, params} = config;
+    const key = getKey(url, data, params);
+  
+    if (apiCache.hasCache(key)) {
+      const cacheObj = apiCache.getCache(key);
+      const currentTime = new Date().getTime();
+      
+      if(currentTime < cacheObj.expire){
+        console.log('serving cached data');
+        config.headers.cached = true;
+        config.data = apiCache.getCache(key).result;
+        return Promise.reject(config);
+      } else {
+        apiCache.clearCache(key);
+      }
     }
   }
+
   return config;
 }
 
 const responseInterceptor = response => {
-  if(response.status !== 200) return response.data;
+  if(response.config.method.toUpperCase() === 'GET'){
+    if(response.status !== 200) return response.data;
 
-  let { url, data, params} = response.config;
-  const currentTime = new Date().getTime();
-  const cacheObj = {
-    expire: currentTime + default_expire,
-    params,
-    data,
-    result: response.data
+    let { url, data, params} = response.config;
+    const currentTime = new Date().getTime();
+    const cacheObj = {
+      expire: currentTime + default_expire,
+      params,
+      data,
+      result: response.data
+    }
+    const key = getKey(url, data, params);;
+    apiCache.setCache(key, cacheObj);
   }
-  const key = getKey(url, data, params);;
-  apiCache.setCache(key, cacheObj);
+
   return response;
 }
 

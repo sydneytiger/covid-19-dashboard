@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import api from '../api';
 import { us } from '../constaints';
 
 function HookCovid19Us({selectedState = ''}) {
@@ -11,7 +10,7 @@ function HookCovid19Us({selectedState = ''}) {
   }, [])
   
   const getDataForStates = () => {
-    api.get(`${us}${usState}`)
+    window.api.get(`${us}${usState}`)
     .then(resp => {
       const data = Array.isArray(resp.data) ? resp.data : [resp.data];
       setStatistic(data);

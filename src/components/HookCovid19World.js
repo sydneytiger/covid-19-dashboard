@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {countries} from '../constaints';
-import api from '../api';
 
 import CovidCountryCard from './CovidCountryCard';
 
@@ -13,7 +12,7 @@ function HookCovid19World({selectedCountry = ''}) {
   }, []);
 
   const getDataForWorldwide = () => {
-    api.get(`${countries}${country}`)
+    window.api.get(`${countries}${country}`)
     .then( resp => {
       let {data} = resp;
       data = Array.isArray(resp.data) ? resp.data : [resp.data];
