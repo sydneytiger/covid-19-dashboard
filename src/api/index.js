@@ -49,7 +49,6 @@ const responseInterceptor = response => {
 
 const errorInterceptor = error => {
   if (error.headers && error.headers.cached === true) {
-    console.log('got cached data in response, serving it directly');
     return Promise.resolve(error);
   }
   return Promise.reject(error);

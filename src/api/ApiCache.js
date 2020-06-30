@@ -1,12 +1,4 @@
 export default class ApiCache {
-  constructor() {
-    this.defaultStorage = 'sessionStorage';
-
-    window.onbeforeunload = () => {
-      this.mapStorage();
-    }
-  }
-
   hasCache(key) {
     return !!window.localStorage.getItem(key)
   }
@@ -23,15 +15,4 @@ export default class ApiCache {
   clearCache(key) {
     window.localStorage.removeItem(key);
   }
-
-  mapStorage() {
-    // let length = window.localStorage.length;
-    
-    // for(let i = 0; i < length; i++){
-    //   const key = window.localStorage.key(i);
-
-    //   if(key.includes='')
-    // }
-  }
-
 };
