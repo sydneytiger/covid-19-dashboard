@@ -12,9 +12,9 @@ function DataKeyDropDown() {
     <div>
       <label htmlFor='key-select'>You concern on: </label>
       <select id='key-select' onChange={onChange}>
-        <option value='cases'>Cases</option>
+        <option value='cases'>Overall Cases</option>
+        <option value='deaths'>Overall Deaths</option>
         <option value='todayCases'>Today Cases</option>
-        <option value='deaths'>Death</option>
         <option value='recovered'>Recovered</option>
         <option value='active'>Active</option>
       </select>

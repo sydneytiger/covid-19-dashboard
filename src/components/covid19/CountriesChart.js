@@ -30,7 +30,7 @@ function CountriesChart({data, dataKey}) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey={dataKey} fill='#800000' />
+        <Bar dataKey={dataKey} fill='#1B4F72' />
       </BarChart>
   )
 }
