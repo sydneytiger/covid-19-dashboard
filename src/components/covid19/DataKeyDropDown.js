@@ -9,7 +9,7 @@ function DataKeyDropDown() {
   }
 
   return (
-    <div>
+    <div className="center margin-top-l ">
       <label htmlFor='key-select'>You concern on: </label>
       <select id='key-select' onChange={onChange}>
         <option value='cases'>Overall Cases</option>

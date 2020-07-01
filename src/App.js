@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './style/App.css';
 import api from './api';
 import { CovidApp } from './components/covid19/CovidApp';
 

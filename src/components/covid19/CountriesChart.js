@@ -9,7 +9,7 @@ function CountriesChart({data, dataKey}) {
 
   useCovidApi(`${countries}?sort=${state.dataKey}`, {
     initialData: [],
-    dataRefiner: data => dispatch({ type: 'SET_DATA', payload: data.slice(0, 10)})
+    dataRefiner: data => dispatch({ type: 'SET_COUNTRY_DATA', payload: data.slice(0, 10)})
   });
 
   const onClick = selected => {

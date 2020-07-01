@@ -1,0 +1,16 @@
+.globalStats-grid {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.globalStats-grid > div {
+  border: 1px solid #aaa;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.globalStats-grid span {
+  margin-left: 5px;
+}
