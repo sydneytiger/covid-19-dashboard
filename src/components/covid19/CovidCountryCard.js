@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import '../../style/CovidCountryCard.css';
 
 function CovidCountryCard({data}) {
 

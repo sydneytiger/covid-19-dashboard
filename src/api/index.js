@@ -55,6 +55,7 @@ const errorInterceptor = error => {
 }
 
 const getKey = (url, data, params) => {
+  if(!data && !params) return url;
   return data ? `${url}?cacheParams=${data}` : `${url}?cacheParams=${params}`;
 }
 

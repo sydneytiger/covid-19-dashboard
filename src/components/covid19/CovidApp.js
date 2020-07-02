@@ -1,12 +1,14 @@
 import React, {useReducer, useEffect} from 'react'
 import useCovidApi from '../../api/useCovidApi';
-import { global} from '../../constaints';
+import { global, countries} from '../../constaints';
 import Title from '../Title';
 import DataKeyDropDown from './DataKeyDropDown';
 import CountriesChart from './CountriesChart';
 import GlobalStatistic from './GlobalStatistic';
 import HistoryChartsCountry from './HistoryChartsCountry';
+import useLocationApi from '../../api/useLocationApi';
 import '../../style/Covid19.css';
+import UserCountryData from './UserCountryData';
 
 const initState = {
   dataKey: 'cases',
@@ -46,6 +48,7 @@ export function CovidApp() {
   const [state, dispatch] = useReducer(reducer, initState);
   const {dataKey, selectedCountry, countryData} = state;
   const globalData = useCovidApi(global, { initialData: {}});
+  const userCountry = useLocationApi();
 
   return (
     <>
@@ -58,8 +61,11 @@ export function CovidApp() {
           <HistoryChartsCountry selectedCountry={selectedCountry}/>
           : <div className="center"><h3>Click on a country to show its history.</h3></div>
         }
+        {
+          userCountry && <UserCountryData userCountry={userCountry}></UserCountryData>
+        }
+        
       </CovidContext.Provider>
     </>
   )
 }
-
