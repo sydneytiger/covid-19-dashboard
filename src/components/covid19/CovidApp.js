@@ -1,6 +1,6 @@
-import React, {useReducer, useEffect} from 'react'
+import React, {useReducer } from 'react'
 import useCovidApi from '../../api/useCovidApi';
-import { global, countries} from '../../constaints';
+import { global } from '../../constaints';
 import Title from '../Title';
 import DataKeyDropDown from './DataKeyDropDown';
 import CountriesChart from './CountriesChart';
@@ -12,6 +12,7 @@ import UserCountryData from './UserCountryData';
 
 const initState = {
   dataKey: 'cases',
+  countryNameList: null,
   selectedCountry: '',
   countryData: [],
   historyData:{},
@@ -35,8 +36,10 @@ const reducer = (state, action) => {
       return { ...state, historyData: action.payload }
     case 'SET_LAST_DAYS': 
       return { ...state, lastDays: {...state.lastDays, [action.key]: action.payload }}
+    case 'SET_COUNTRY_NAME_LIST':
+      return { ...state,  countryNameList: action.payload }
     case 'ERROR':
-      return { ...initState, error: action.payload, loading: false };
+      return { ...state, error: action.payload };
     default: 
       return state;
   }

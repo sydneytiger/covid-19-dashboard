@@ -1,4 +1,7 @@
 import React, { useContext } from 'react'
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import { CovidContext } from './CovidApp';
 
 function DataKeyDropDown() {
@@ -9,16 +12,25 @@ function DataKeyDropDown() {
   }
 
   return (
-    <div className="center margin-top-l ">
-      <label htmlFor='key-select'>You concern on: </label>
-      <select id='key-select' onChange={onChange}>
-        <option value='cases'>Overall Cases</option>
-        <option value='deaths'>Overall Deaths</option>
-        <option value='todayCases'>Today Cases</option>
-        <option value='recovered'>Recovered</option>
-        <option value='active'>Active</option>
-      </select>
-    </div>
+    <>
+      <div style={{ width: '100%', textAlign: 'center', margin: ' 30px 0 10px 0'}}>
+        <FormControl style={{minWidth: '180px', textAlign:'center'}}>
+          <InputLabel htmlFor="key-select">You concern on</InputLabel>
+          <Select
+            native
+            onChange={onChange}
+            inputProps={{
+              id: 'key-select',
+            }}>
+            <option value='cases'>Overall Cases</option>
+            <option value='deaths'>Overall Deaths</option>
+            <option value='todayCases'>Today Cases</option>
+            <option value='recovered'>Recovered</option>
+            <option value='active'>Active</option>
+          </Select>
+        </FormControl>
+      </div>
+    </>
   )
 }
 

@@ -14,8 +14,8 @@ function HistoryChartsCountry() {
     dataRefiner: data => dispatch({ type: 'SET_HISTORY_DATA', payload: data.timeline })
   });
 
-  const handleLastDayChange = (e, key) => {
-    dispatch({ type: 'SET_LAST_DAYS', key, payload: e.target.value })
+  const handleLastDayChange = (val, key) => {
+    dispatch({ type: 'SET_LAST_DAYS', key, payload: val })
   }
 
   const transformHistory = (timeline = {}) => {
@@ -33,19 +33,19 @@ function HistoryChartsCountry() {
           dataKey="Cases" 
           data={transformHistory(historyData.cases)} 
           lastDays={lastDays.cases} 
-          onLastDaysChange={e => handleLastDayChange(e, 'cases')} />
+          onLastDaysChange={(e, val) => handleLastDayChange(val, 'cases')} />
 
         <HistoryChart 
           dataKey="Deaths" 
           data={transformHistory(historyData.deaths)} 
           lastDays={lastDays.deaths} 
-          onLastDaysChange={e => handleLastDayChange(e, 'deaths')} />
+          onLastDaysChange={(e, val) => handleLastDayChange(val, 'deaths')} />
         
         <HistoryChart 
           dataKey="Recovered" 
           data={transformHistory(historyData.recovered)} 
           lastDays={lastDays.recovered} 
-          onLastDaysChange={e => handleLastDayChange(e, 'recovered')} />
+          onLastDaysChange={(e, val) => handleLastDayChange(val, 'recovered')} />
       </div>
     </div>
   )

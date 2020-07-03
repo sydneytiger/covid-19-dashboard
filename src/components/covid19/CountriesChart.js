@@ -11,8 +11,18 @@ function CountriesChart({data, dataKey}) {
     initialData: [],
     dataRefiner: data => { 
       dispatch({ type: 'SET_COUNTRY_DATA', payload: data.slice(0, 10) });
+      const countries = extracAllCountries(data);
+      dispatch({ type: 'SET_COUNTRY_NAME_LIST', payload: countries });
     }
   });
+
+  const extracAllCountries = data => {
+    const arr = [];
+    for(let item of data) {
+      arr.push(item.country);
+    }
+    return arr;
+  }
 
   const onClick = selected => {
     dispatch({type: 'SET_COUNTRY', payload: selected.activeLabel});

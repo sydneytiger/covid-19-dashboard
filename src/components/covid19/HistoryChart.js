@@ -1,4 +1,6 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area} from "recharts";
 
 const ColorCode = {
@@ -36,9 +38,21 @@ function HistoryChart({dataKey, data, lastDays, onLastDaysChange }) {
           fill={`url(#${dataKey})`}
         />
       </AreaChart>
-      <h3>{dataKey}</h3>
-      <input type="range" min="1" max="30" value={lastDays} onChange={onLastDaysChange} />
-      Last {lastDays} days
+      <div style={{width: '300px', textAlign:'center', margin:'auto'}}>
+        <Slider
+          defaultValue={30}
+          aria-labelledby="lastDays-slider"
+          valueLabelDisplay="auto"
+          step={1}
+          min={1}
+          max={30}
+          value={lastDays}
+          onChange={onLastDaysChange}
+        />
+        <Typography id="lastDays-slider" gutterBottom>
+          {dataKey} of last {lastDays} days
+        </Typography>
+      </div>
     </div>
   )
 }
