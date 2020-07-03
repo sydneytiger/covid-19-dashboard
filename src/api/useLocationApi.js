@@ -36,8 +36,8 @@ function useLocationApi() {
     const api_key = process.env.REACT_APP_GEO_API_KEY;
     axios.get(`${google_GeoCode_url}?latlng=${latitude},${longitude}&key=${api_key}`)
     .then(resp => {
-        const { status, results, errorMessage } = resp.data;
-        if(status !== 'OK') throw Error(errorMessage);
+        const { status, results, error_message } = resp.data;
+        if(status !== 'OK') throw Error(error_message);
         if(results && results[0]) {
           for(let address of results[0].address_components){
             if(address.types.indexOf('country') !== -1){
@@ -47,7 +47,7 @@ function useLocationApi() {
         }
     })
     .catch(status => {
-        console.log('Fail to get geolocation country.  Returned status of', status)
+        console.log('Fail to get geolocation country', status)
     })
   }
 
