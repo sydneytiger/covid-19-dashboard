@@ -8,10 +8,12 @@ function UserCountryData({userCountry}) {
   const data = useCovidApi(`${countries}${userCountry}`, { initialData: null });
 
   return  (
+    <>
+      { data && <h2 className="center">Covid in your country</h2>}
       <div className="grid">
-        { data && <h2 className="center">Covid in your country</h2>}
         { data && <CovidCountryCard data={data} /> }
       </div>
+    </>
   )
 }
 

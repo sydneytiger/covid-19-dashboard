@@ -19,9 +19,14 @@ function CountriesChart({data, dataKey}) {
   const extracAllCountries = data => {
     const arr = [];
     for(let item of data) {
-      arr.push(item.country);
+      if(item.countryInfo.iso2) {
+        arr.push({
+          name: item.country,
+          code: item.countryInfo.iso2
+        });
+      }
     }
-    return arr;
+    return arr.sort((a, b) => a.name > b.name ? 1 : -1);
   }
 
   const onClick = selected => {

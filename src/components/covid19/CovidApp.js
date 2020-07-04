@@ -6,12 +6,14 @@ import DataKeyDropDown from './DataKeyDropDown';
 import CountriesChart from './CountriesChart';
 import GlobalStatistic from './GlobalStatistic';
 import HistoryChartsCountry from './HistoryChartsCountry';
+import SearchCountry from './SearchCountry';
 import useLocationApi from '../../api/useLocationApi';
 import '../../style/Covid19.css';
 import UserCountryData from './UserCountryData';
 
 const initState = {
   dataKey: 'cases',
+  searchCountry: null,
   countryNameList: null,
   selectedCountry: '',
   countryData: [],
@@ -38,6 +40,8 @@ const reducer = (state, action) => {
       return { ...state, lastDays: {...state.lastDays, [action.key]: action.payload }}
     case 'SET_COUNTRY_NAME_LIST':
       return { ...state,  countryNameList: action.payload }
+    case 'SET_SEARCHING_COUNTRY_NAME':
+      return { ... state, searchCountry: action.payload }
     case 'ERROR':
       return { ...state, error: action.payload };
     default: 
@@ -49,7 +53,7 @@ export const CovidContext = React.createContext();
 
 export function CovidApp() {
   const [state, dispatch] = useReducer(reducer, initState);
-  const {dataKey, selectedCountry, countryData} = state;
+  const {dataKey, selectedCountry, countryData, searchCountry} = state;
   const globalData = useCovidApi(global, { initialData: {}});
   const userCountry = useLocationApi();
 
@@ -64,9 +68,9 @@ export function CovidApp() {
           <HistoryChartsCountry selectedCountry={selectedCountry}/>
           : <div className="center"><h3>Click on a country to show its history.</h3></div>
         }
-        {
-          userCountry && <UserCountryData userCountry={userCountry}></UserCountryData>
-        }
+        <SearchCountry />
+        { userCountry && <UserCountryData userCountry={userCountry}></UserCountryData> }
+        { searchCountry && <UserCountryData userCountry={searchCountry.name}></UserCountryData> }
         
       </CovidContext.Provider>
     </>
