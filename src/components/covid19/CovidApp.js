@@ -3,13 +3,14 @@ import useCovidApi from '../../api/useCovidApi';
 import { global } from '../../constaints';
 import Title from '../Title';
 import DataKeyDropDown from './DataKeyDropDown';
-import CountriesChart from './CountriesChart';
+import CountriesBarChart from './CountriesBarChart';
 import GlobalStatistic from './GlobalStatistic';
 import HistoryChartsCountry from './HistoryChartsCountry';
 import SearchCountry from './SearchCountry';
 import useLocationApi from '../../api/useLocationApi';
-import '../../style/Covid19.css';
+// import '../../style/Covid19.css';
 import UserCountryData from './UserCountryData';
+import { Container, Typography } from '@material-ui/core';
 
 const initState = {
   dataKey: 'cases',
@@ -58,21 +59,21 @@ export function CovidApp() {
   const userCountry = useLocationApi();
 
   return (
-    <>
+    <Container fixed>
       <Title text="Covide-19 Statistic" />
       <GlobalStatistic data={globalData} />
       <CovidContext.Provider value={{ state, dispatch}} >
         <DataKeyDropDown />
-        <CountriesChart data={countryData} dataKey={dataKey} />
+        <CountriesBarChart data={countryData} dataKey={dataKey} />
         {selectedCountry ? 
           <HistoryChartsCountry selectedCountry={selectedCountry}/>
-          : <div className="center"><h3>Click on a country to show its history.</h3></div>
+          : <Typography variant="h5" align="center">Click on a country to show its history</Typography>
         }
         <SearchCountry />
         { userCountry && <UserCountryData userCountry={userCountry}></UserCountryData> }
         { searchCountry && <UserCountryData userCountry={searchCountry.name}></UserCountryData> }
         
       </CovidContext.Provider>
-    </>
+    </Container>
   )
 }

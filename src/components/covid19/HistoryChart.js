@@ -13,9 +13,9 @@ function HistoryChart({dataKey, data, lastDays, onLastDaysChange }) {
   const color = ColorCode[dataKey];
   
   return (
-    <div>
+    <div className="center">
       <AreaChart
-        width={400}
+        width={350}
         height={150}
         data={data.slice(-lastDays)}
         margin={{ top: 10, right: 30, left: 10, bottom: 0 }}

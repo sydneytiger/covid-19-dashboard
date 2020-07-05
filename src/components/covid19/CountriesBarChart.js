@@ -4,7 +4,7 @@ import { CovidContext } from './CovidApp';
 import { countries } from '../../constaints';
 import useCovidApi from '../../api/useCovidApi';
 
-function CountriesChart({data, dataKey}) {
+function CountriesBarChart({data, dataKey}) {
   const {state, dispatch} = useContext(CovidContext);
 
   useCovidApi(`${countries}?sort=${state.dataKey}`, {
@@ -35,7 +35,7 @@ function CountriesChart({data, dataKey}) {
 
   return (
     <BarChart
-      width={1200}
+      width={960}
       height={250}
       style={{ margin: "auto" }}
       margin={{ top: 30, left: 20, right: 30 }}
@@ -52,4 +52,4 @@ function CountriesChart({data, dataKey}) {
   )
 }
 
-export default CountriesChart
+export default CountriesBarChart

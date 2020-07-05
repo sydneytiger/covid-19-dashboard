@@ -14,7 +14,7 @@ function DataKeyDropDown() {
   return (
     <>
       <div style={{ width: '100%', textAlign: 'center', margin: ' 30px 0 10px 0'}}>
-        <FormControl style={{minWidth: '180px', textAlign:'center'}}>
+        <FormControl style={{minWidth: '250px', textAlign:'center'}}>
           <InputLabel htmlFor="key-select">You concern on</InputLabel>
           <Select
             native

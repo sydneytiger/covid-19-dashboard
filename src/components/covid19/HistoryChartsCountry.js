@@ -3,7 +3,8 @@ import {CovidContext} from './CovidApp';
 import useCovidApi from '../../api/useCovidApi';
 import { history } from '../../constaints';
 import HistoryChart from './HistoryChart';
-import '../../style/HistoryChartsCountry.css'
+import { Grid, Typography } from '@material-ui/core';
+// import '../../style/HistoryChartsCountry.css'
 
 function HistoryChartsCountry() {
   const {state, dispatch} = useContext(CovidContext);
@@ -26,15 +27,16 @@ function HistoryChartsCountry() {
   }
 
   return (
-    <div className="center">
-      <h2>{selectedCountry} history data</h2>
-      <div className=" history-group">
+    <>
+      <Typography variant="h5" align="center" gutterBottom>
+          {selectedCountry} history data
+      </Typography>
+      <Grid container justify="center" spacing={5} style={{marginTop:"10px"}}>
         <HistoryChart 
           dataKey="Cases" 
           data={transformHistory(historyData.cases)} 
           lastDays={lastDays.cases} 
           onLastDaysChange={(e, val) => handleLastDayChange(val, 'cases')} />
-
         <HistoryChart 
           dataKey="Deaths" 
           data={transformHistory(historyData.deaths)} 
@@ -46,8 +48,8 @@ function HistoryChartsCountry() {
           data={transformHistory(historyData.recovered)} 
           lastDays={lastDays.recovered} 
           onLastDaysChange={(e, val) => handleLastDayChange(val, 'recovered')} />
-      </div>
-    </div>
+      </Grid>
+    </>
   )
 }
 
