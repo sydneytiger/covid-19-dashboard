@@ -7,10 +7,10 @@ Data source: [https://disease.sh/](https://disease.sh/)
 
 ## RoadMap 
 
-### Axios + cache ![#c5f015](done)
+### Axios + cache (done)
 Implement an axios cahce service using vanilla javascript. Cache the data in either localstorage or sessionstorage.
 
-### Custom hook ![#c5f015](done)
+### Custom hook (done)
 Make a generic covide api api by using react custom hook.
 
 ### Rechart integration (done)
