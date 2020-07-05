@@ -1,8 +1,9 @@
 import React from 'react'
 import { PieChart, Pie, Cell } from 'recharts';
 
-function GlobalPieChart({data}) {
+function GlobalPieChart({data, dataKey}) {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
   return (
     <div>
       <PieChart width={800} height={400}>
@@ -13,8 +14,7 @@ function GlobalPieChart({data}) {
           labelLine={false}
           outerRadius={80} 
           fill="#8884d8"
-          dataKey={dataKey}
-        >
+          dataKey={dataKey}>
           {
             data.map((entry, index) => <Cell key={dataKey} fill={COLORS[index % COLORS.length]}/>)
           }

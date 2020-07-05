@@ -1,16 +1,17 @@
-import React, {useReducer } from 'react'
+import React, { useReducer } from 'react'
 import useCovidApi from '../../api/useCovidApi';
 import { global } from '../../constaints';
 import Title from '../Title';
 import DataKeyDropDown from './DataKeyDropDown';
 import CountriesBarChart from './CountriesBarChart';
+import CountriesPieChar from './CountriesPieChar';
 import GlobalStatistic from './GlobalStatistic';
 import HistoryChartsCountry from './HistoryChartsCountry';
 import SearchCountry from './SearchCountry';
 import useLocationApi from '../../api/useLocationApi';
-// import '../../style/Covid19.css';
 import UserCountryData from './UserCountryData';
 import { Container, Typography } from '@material-ui/core';
+import useWindowDimensions from '../hooks/useWindowDimensions';
 
 const initState = {
   dataKey: 'cases',
@@ -42,7 +43,7 @@ const reducer = (state, action) => {
     case 'SET_COUNTRY_NAME_LIST':
       return { ...state,  countryNameList: action.payload }
     case 'SET_SEARCHING_COUNTRY_NAME':
-      return { ... state, searchCountry: action.payload }
+      return { ...state, searchCountry: action.payload }
     case 'ERROR':
       return { ...state, error: action.payload };
     default: 
@@ -57,6 +58,11 @@ export function CovidApp() {
   const {dataKey, selectedCountry, countryData, searchCountry} = state;
   const globalData = useCovidApi(global, { initialData: {}});
   const userCountry = useLocationApi();
+  const { width } = useWindowDimensions();
+  const countriesChartProps = {
+    data: countryData,
+    dataKey: dataKey
+  }
 
   return (
     <Container fixed>
@@ -64,7 +70,10 @@ export function CovidApp() {
       <GlobalStatistic data={globalData} />
       <CovidContext.Provider value={{ state, dispatch}} >
         <DataKeyDropDown />
-        <CountriesBarChart data={countryData} dataKey={dataKey} />
+        { width && width > 768
+          ? <CountriesBarChart {...countriesChartProps} /> 
+          : <CountriesPieChar {...countriesChartProps} />
+        }
         {selectedCountry ? 
           <HistoryChartsCountry selectedCountry={selectedCountry}/>
           : <Typography variant="h5" align="center">Click on a country to show its history</Typography>
