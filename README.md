@@ -28,11 +28,16 @@ Find out user's locate country by using IP(fall back to google geocode api). And
 ### World countries search (done)
 User is able to search a country for covide data.
 
-### Mertrial UI integration (in progress)
+### Mertrial UI integration (done)
 Need some advise from an UX colleague, layout and design to make the page more human readable. 
 
+### Display user local country covid data on page top (in progress)
+- Display total cases, deaths and today cases, death for user local country. 
+- If the local country cannot be resovled. Let use choose the country from a dropdown. 
+- local country data should be saved in to localstorage.
+
 ### Responsive UI implementation
-Adapt the website to tablet and mobile device.
+Adapt the website to tablet and mobile device. Top ten countries barchar(web and tablet device width) and piechar(mobile device width)
 
 ### Storybook integration
 [https://storybook.js.org/](https://storybook.js.org/)

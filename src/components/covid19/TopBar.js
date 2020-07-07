@@ -8,13 +8,13 @@ import { countries } from '../../constaints';
 
 const useStyles = makeStyles({
   root: {
-    minHeight: 70,
+    minHeight: 65,
     paddingTop: 10,
     paddingBottom: 10
   },
   flag: {
-    width: 100,
-    height: 50,
+    width: 70,
+    height: 40,
     borderRadius: 5,
     boxShadow: '0 2px 20px rgba(0,0,0,0.3)',
     objectFit: 'fill'
@@ -31,7 +31,10 @@ function TopBar({userCountry}) {
           <Grid container justify="center" alignItems="center" spacing={5}>
             <Grid item><img src={data.countryInfo.flag} alt={data.country} className={classes.flag} /></Grid>
             <Grid item>
-              <Grid container alignItems="center" spacing={2}>
+              <Grid container alignItems="center" spacing={1}>
+              <Grid item>
+                  <Typography variant="h6">TOTAL </Typography>
+                </Grid>
                 <Grid item>
                   <AirlineSeatFlatTwoToneIcon fontSize="large" className="red"/>
                 </Grid>
@@ -51,7 +54,10 @@ function TopBar({userCountry}) {
               </Grid>
             </Grid>
             <Grid item>
-              <Grid container alignItems="center" spacing={2}>
+              <Grid container alignItems="center" spacing={1}>
+                <Grid item>
+                  <Typography variant="h6">TODAY </Typography>
+                </Grid>
                 <Grid item>
                   <AirlineSeatFlatTwoToneIcon fontSize="large" className="red"/>
                 </Grid>
@@ -71,7 +77,9 @@ function TopBar({userCountry}) {
               </Grid>
             </Grid>
           </Grid>
-        : <div>Cool</div>
+        : <Typography variant="h6" align="center" className="red">
+            TODO: use should be able to select a country when IP and geocode cannot work it out
+          </Typography>
       }
     </AppBar>
   )
