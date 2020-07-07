@@ -26,7 +26,7 @@ function TopBar({userCountry}) {
   const data = useCovidApi(`${countries}${userCountry}`, { initialData: null });
 
   return (
-    <AppBar position="sticky" color="transparent" className={classes.root}>
+    <AppBar position="sticky" color="default" className={classes.root}>
       { data ?
           <Grid container justify="center" alignItems="center" spacing={5}>
             <Grid item><img src={data.countryInfo.flag} alt={data.country} className={classes.flag} /></Grid>
