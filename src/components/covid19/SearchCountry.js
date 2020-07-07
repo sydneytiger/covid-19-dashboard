@@ -9,12 +9,16 @@ function SearchCountry() {
   const countryFlag = iso => {
     return typeof String.fromCodePoint !== 'undefined'
       ? iso.toUpperCase().replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
-      : iso;
+      : '';
   }
   
   const handleChange = (e, val) => {
     if(!val) return;
-    dispatch({ type: 'SET_SEARCHING_COUNTRY_NAME', payload: val});
+    const countryList = []
+    for(let country of val){
+      countryList.push(country.name);
+    }
+    dispatch({ type: 'SET_SEARCHING_COUNTRY_NAME', payload: countryList});
   }
 
   return (<>
@@ -23,6 +27,8 @@ function SearchCountry() {
           style={{width: '300px'}}
           options={countryNameList}
           autoHighlight
+          multiple
+          freeSolo
           getOptionLabel={option => option.name}
           renderOption={option => ( 
             <React.Fragment>
@@ -33,7 +39,7 @@ function SearchCountry() {
           renderInput={params => (
             <TextField 
               {...params}
-              label="Choose a country"
+              label="Choose counties"
             />
           )}
           onChange={handleChange}/>

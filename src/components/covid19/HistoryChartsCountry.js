@@ -37,6 +37,7 @@ function HistoryChartsCountry() {
           data={transformHistory(historyData.cases)} 
           lastDays={lastDays.cases} 
           onLastDaysChange={(e, val) => handleLastDayChange(val, 'cases')} />
+        
         <HistoryChart 
           dataKey="Deaths" 
           data={transformHistory(historyData.deaths)} 

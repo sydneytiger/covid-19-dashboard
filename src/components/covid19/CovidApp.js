@@ -9,13 +9,14 @@ import GlobalStatistic from './GlobalStatistic';
 import HistoryChartsCountry from './HistoryChartsCountry';
 import SearchCountry from './SearchCountry';
 import useLocationApi from '../../api/useLocationApi';
-import UserCountryData from './UserCountryData';
+import SearchCountryData from './SearchCountryData';
 import { Container, Typography } from '@material-ui/core';
 import useWindowDimensions from '../hooks/useWindowDimensions';
+import TopBar from './TopBar';
 
 const initState = {
   dataKey: 'cases',
-  searchCountry: null,
+  searchCountry: [],
   countryNameList: null,
   selectedCountry: '',
   countryData: [],
@@ -43,7 +44,7 @@ const reducer = (state, action) => {
     case 'SET_COUNTRY_NAME_LIST':
       return { ...state,  countryNameList: action.payload }
     case 'SET_SEARCHING_COUNTRY_NAME':
-      return { ...state, searchCountry: action.payload }
+      return { ...state, searchCountry: [...action.payload] }
     case 'ERROR':
       return { ...state, error: action.payload };
     default: 
@@ -65,10 +66,11 @@ export function CovidApp() {
   }
 
   return (
-    <Container fixed>
-      <Title text="Covide-19 Statistic" />
-      <GlobalStatistic data={globalData} />
-      <CovidContext.Provider value={{ state, dispatch}} >
+    <CovidContext.Provider value={{ state, dispatch}} >
+      <TopBar userCountry={userCountry} />
+      <Container fixed>
+        <Title text="Covide-19 Statistic" />
+        <GlobalStatistic data={globalData} />
         <DataKeyDropDown />
         { width && width > 768
           ? <CountriesBarChart {...countriesChartProps} /> 
@@ -79,10 +81,9 @@ export function CovidApp() {
           : <Typography variant="h5" align="center">Click on a country to show its history</Typography>
         }
         <SearchCountry />
-        { userCountry && <UserCountryData userCountry={userCountry}></UserCountryData> }
-        { searchCountry && <UserCountryData userCountry={searchCountry.name}></UserCountryData> }
-        
-      </CovidContext.Provider>
-    </Container>
+        {/* { userCountry && <UserCountryData userCountry={userCountry}></UserCountryData> } */}
+        { searchCountry.length && <SearchCountryData coutryNameList={searchCountry} /> }
+      </Container>
+    </CovidContext.Provider>
   )
 }
