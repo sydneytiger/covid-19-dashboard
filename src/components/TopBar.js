@@ -3,8 +3,9 @@ import { Typography, AppBar, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MoodBadTwoToneIcon from '@material-ui/icons/MoodBadTwoTone';
 import AirlineSeatFlatTwoToneIcon from '@material-ui/icons/AirlineSeatFlatTwoTone';
-import useCovidApi from '../../api/useCovidApi';
-import { countries } from '../../constaints';
+import useCovidApi from '../hooks/useCovidApi';
+import { countries } from '../constaints';
+import {countryDataMapper} from '../utils/dataMapper';
 
 const useStyles = makeStyles({
   root: {
@@ -23,13 +24,18 @@ const useStyles = makeStyles({
 
 function TopBar({userCountry}) {
   const classes = useStyles();
-  const data = useCovidApi(`${countries}${userCountry}`, { initialData: null });
+  const data = useCovidApi(
+    `${countries}${userCountry}`, 
+    { 
+      initialData: null,
+      dataRefiner: countryDataMapper
+    });
 
   return (
     <AppBar position="sticky" color="default" className={classes.root}>
       { data ?
           <Grid container justify="center" alignItems="center" spacing={5}>
-            <Grid item><img src={data.countryInfo.flag} alt={data.country} className={classes.flag} /></Grid>
+            <Grid item><img src={data.flag} alt={data.country} className={classes.flag} /></Grid>
             <Grid item>
               <Grid container alignItems="center" spacing={1}>
               <Grid item>

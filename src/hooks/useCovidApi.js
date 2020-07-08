@@ -1,5 +1,5 @@
 import {useState, useEffect, useCallback} from 'react';
-import api from './index';
+import api from '../api/index';
 
 // A generic API custom hook for fetching covid 19 data
 // dataRefiner: a middleware like function transforming data between data source and UI

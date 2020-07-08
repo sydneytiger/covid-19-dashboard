@@ -1,7 +1,7 @@
 import React from 'react';
 import './style/App.css';
 import api from './api';
-import { CovidApp } from './components/covid19/CovidApp';
+import { CovidApp } from './components/CovidApp';
 
 function App() {
   window.api = api;

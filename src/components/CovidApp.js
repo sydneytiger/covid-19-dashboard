@@ -1,14 +1,13 @@
 import React, { useReducer } from 'react'
-import useCovidApi from '../../api/useCovidApi';
-import { global } from '../../constaints';
-import Title from '../Title';
+import useCovidApi from '../hooks/useCovidApi';
+import { global } from '../constaints';
 import DataKeyDropDown from './DataKeyDropDown';
 import CountriesBarChart from './CountriesBarChart';
 import CountriesPieChar from './CountriesPieChar';
 import GlobalStatistic from './GlobalStatistic';
 import HistoryChartsCountry from './HistoryChartsCountry';
 import SearchCountry from './SearchCountry';
-import useLocationApi from '../../api/useLocationApi';
+import useLocationApi from '../hooks/useLocationApi';
 import SearchCountryData from './SearchCountryData';
 import { Container, Typography } from '@material-ui/core';
 import useWindowDimensions from '../hooks/useWindowDimensions';
@@ -69,7 +68,7 @@ export function CovidApp() {
     <CovidContext.Provider value={{ state, dispatch}} >
       <TopBar userCountry={userCountry} />
       <Container fixed>
-        <Title text="Covide-19 Statistic" />
+        <Typography variant="h4" align="center" style={{ margin:" 20px 0"}}>Covide-19 Statistic</Typography>
         <GlobalStatistic data={globalData} />
         <DataKeyDropDown />
         { width && width > 768

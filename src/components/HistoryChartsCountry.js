@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
 import {CovidContext} from './CovidApp';
-import useCovidApi from '../../api/useCovidApi';
-import { history } from '../../constaints';
+import useCovidApi from '../hooks/useCovidApi';
+import { history } from '../constaints';
 import HistoryChart from './HistoryChart';
 import { Grid, Typography } from '@material-ui/core';
-// import '../../style/HistoryChartsCountry.css'
 
 function HistoryChartsCountry() {
   const {state, dispatch} = useContext(CovidContext);

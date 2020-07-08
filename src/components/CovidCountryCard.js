@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../style/CovidCountryCard.css';
+import '../style/CovidCountryCard.css';
 
 function CovidCountryCard({data}) {
 
@@ -7,7 +7,7 @@ function CovidCountryCard({data}) {
     <div>
       <div className="covid-country-card">
         <div className="header">
-          <img src={data.countryInfo.flag} alt={data.country} />
+          <img src={data.flag} alt={data.country} />
           <h3>{data.country}</h3>
         </div>
         <div className="body">

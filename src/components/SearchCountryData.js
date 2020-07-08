@@ -1,9 +1,9 @@
 import React from 'react';
-import { countries } from '../../constaints';
+import { countries } from '../constaints';
 import CovidCountryCard from './CovidCountryCard';
-import useCovidApi from '../../api/useCovidApi';
+import useCovidApi from '../hooks/useCovidApi';
 import { Typography, Grid } from '@material-ui/core';
-
+import {countryDataMapper} from '../utils/dataMapper';
 
 function SearchCountryData({coutryNameList}) {
   const data = useCovidApi(
@@ -11,6 +11,7 @@ function SearchCountryData({coutryNameList}) {
     { 
       initialData: null,
       dataRefiner:data => {
+        data = countryDataMapper(data);
         if(!Array.isArray(data)) return [data];
         return data;
       }
@@ -23,7 +24,7 @@ function SearchCountryData({coutryNameList}) {
           Search Country
         </Typography>
         <Grid container justify="flex-start" spacing={5}>
-          {data.map(item => <Grid item key={item.countryInfo.iso2}><CovidCountryCard data={item} /></Grid>)}
+          {data.map(item => <Grid item key={item.iso2}><CovidCountryCard data={item} /></Grid>)}
         </Grid>
       </>
     )
