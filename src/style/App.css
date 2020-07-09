@@ -21,11 +21,6 @@ body {
   text-align: center;
 }
 
-.grid {
-  display: grid;
-  justify-content: center;
-}
-
 .red { color: red; }
 .gray { color: gray; }
 .green { color: green; }

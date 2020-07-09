@@ -24,4 +24,4 @@ const defaultData = {
   population:25504621
 }
 
-export const Default = () => <CovidCountryCard data={defaultData} />;
+export const defaultView = () => <CovidCountryCard data={defaultData} />;

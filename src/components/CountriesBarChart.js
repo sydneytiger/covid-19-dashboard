@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
-import { CovidContext } from './CovidApp';
+import { TopTenContext } from '../contexts/topTenContext';
 import useTopTenCountries from '../hooks/useTopTenCountries';
 
 function CountriesBarChart({data, dataKey}) {
-  const {dispatch} = useContext(CovidContext);
+  const { topTenDispatch } = useContext(TopTenContext);
 
   useTopTenCountries();
 
   const onClick = selected => {
-    dispatch({type: 'SET_COUNTRY', payload: selected.activeLabel});
+    topTenDispatch({type: 'SET_COUNTRY', payload: selected.activeLabel});
   }
 
   return (

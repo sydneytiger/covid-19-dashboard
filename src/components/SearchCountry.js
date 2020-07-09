@@ -1,11 +1,36 @@
 import React, { useContext } from 'react'
 import { Autocomplete } from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
-import { CovidContext } from './CovidApp';
+import { SearchContext } from '../contexts/searchContext';
+import useCovidApi from '../hooks/useCovidApi';
+import { countries } from '../constaints';
+
+const extracAllCountries = data => {
+  const arr = [];
+  for(let item of data) {
+    if(item.countryInfo.iso2) {
+      arr.push({
+        name: item.country,
+        code: item.countryInfo.iso2
+      });
+    }
+  }
+  return arr.sort((a, b) => a.name > b.name ? 1 : -1);
+}
 
 function SearchCountry() {
-  const { state, dispatch } = useContext(CovidContext);
-  const { countryNameList } = state;
+  const { searchState, searchDispatch } = useContext(SearchContext);
+  const { countryNameList } = searchState;
+
+  useCovidApi(countries, {
+    initialData: [],
+    dataRefiner: data => { 
+      const countries = extracAllCountries(data);
+      searchDispatch({ type: 'SET_COUNTRY_NAME_LIST', payload: countries });
+    }
+  });
+
+
   const countryFlag = iso => {
     return typeof String.fromCodePoint !== 'undefined'
       ? iso.toUpperCase().replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
@@ -18,33 +43,35 @@ function SearchCountry() {
     for(let country of val){
       countryList.push(country.name);
     }
-    dispatch({ type: 'SET_SEARCHING_COUNTRY_NAME', payload: countryList});
+    searchDispatch({ type: 'SET_SEARCHING_COUNTRY_NAME', payload: countryList});
   }
 
-  return (<>
-    {countryNameList && <Autocomplete
-          id="country-list"
-          style={{width: '300px'}}
-          options={countryNameList}
-          autoHighlight
-          multiple
-          freeSolo
-          getOptionLabel={option => option.name}
-          renderOption={option => ( 
-            <React.Fragment>
-              <span>{countryFlag(option.code)}</span>
-              {option.name}
-            </React.Fragment>
-          )}
-          renderInput={params => (
-            <TextField 
-              {...params}
-              label="Choose counties"
-            />
-          )}
-          onChange={handleChange}/>
-    }
-  </>)
+  return (
+    <div style={{marginBottom:30}}>
+      {countryNameList && <Autocomplete
+            id="country-list"
+            fullWidth
+            options={countryNameList}
+            autoHighlight
+            multiple
+            freeSolo
+            getOptionLabel={option => option.name}
+            renderOption={option => ( 
+              <React.Fragment>
+                <span>{countryFlag(option.code)}</span>
+                {option.name}
+              </React.Fragment>
+            )}
+            renderInput={params => (
+              <TextField 
+                {...params}
+                label="Search Country"
+              />
+            )}
+            onChange={handleChange}/>
+      }
+    </div>
+  )
 }
 
 export default SearchCountry

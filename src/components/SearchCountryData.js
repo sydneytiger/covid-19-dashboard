@@ -14,19 +14,14 @@ function SearchCountryData({coutryNameList}) {
         data = countryDataMapper(data);
         if(!Array.isArray(data)) return [data];
         return data;
-      }
-    });
+    }
+  });
 
   if(data && data.length){
     return (
-      <>
-        <Typography variant="h4" align="center" gutterBottom>
-          Search Country
-        </Typography>
-        <Grid container justify="flex-start" spacing={5}>
-          {data.map(item => <Grid item key={item.iso2}><CovidCountryCard data={item} /></Grid>)}
-        </Grid>
-      </>
+      <Grid container justify="flex-start" alignItems="center" spacing={5}>
+        {data.map(item => <Grid item key={item.iso2} xs={3}><CovidCountryCard data={item} /></Grid>)}
+      </Grid>
     )
   }
   return null;

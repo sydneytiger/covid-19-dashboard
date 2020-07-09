@@ -1,21 +1,21 @@
 import React, { useContext } from 'react'
-import {CovidContext} from './CovidApp';
+import { TopTenContext } from '../contexts/topTenContext';
 import useCovidApi from '../hooks/useCovidApi';
 import { history } from '../constaints';
 import HistoryChart from './HistoryChart';
 import { Grid, Typography } from '@material-ui/core';
 
 function HistoryChartsCountry() {
-  const {state, dispatch} = useContext(CovidContext);
-  const {selectedCountry, lastDays, historyData} = state;
+  const {topTenState, topTenDispatch} = useContext(TopTenContext);
+  const {selectedCountry, lastDays, historyData} = topTenState;
 
   useCovidApi(`${history}${selectedCountry}`, {
     initialData: {},
-    dataRefiner: data => dispatch({ type: 'SET_HISTORY_DATA', payload: data.timeline })
+    dataRefiner: data => topTenDispatch({ type: 'SET_HISTORY_DATA', payload: data.timeline })
   });
 
   const handleLastDayChange = (val, key) => {
-    dispatch({ type: 'SET_LAST_DAYS', key, payload: val })
+    topTenDispatch({ type: 'SET_LAST_DAYS', key, payload: val })
   }
 
   const transformHistory = (timeline = {}) => {
