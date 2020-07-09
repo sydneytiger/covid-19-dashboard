@@ -19,7 +19,7 @@ function useLocationApi() {
   const geoLocationLookup = () => {
     if (!navigator.geolocation){
       console.log("Geolocation is not supported by your browser");
-       return;
+      return 'error';
      }
      function success(position) {
        var latitude  = position.coords.latitude;
@@ -28,6 +28,7 @@ function useLocationApi() {
      }
      function error() {
        console.log("Unable to retrieve your location");
+       setLocation('error');
      }
      navigator.geolocation.getCurrentPosition(success, error);
   }
@@ -48,6 +49,7 @@ function useLocationApi() {
     })
     .catch(status => {
         console.log('Fail to get geolocation country', status)
+        setLocation('error');
     })
   }
 

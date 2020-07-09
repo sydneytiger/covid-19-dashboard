@@ -1,15 +1,15 @@
-export const countryDataMapper = data => {
-  if(!Array.isArray(data)) return _countryDataMapper(data);
+export const countryCovideDataMapper = data => {
+  if(!Array.isArray(data)) return _countryCovidDataMapper(data);
   
   const result = [];
   for(let item of data){
-    result.push(_countryDataMapper(item));
+    result.push(_countryCovidDataMapper(item));
   }
-
+  
   return result;
 }
 
-const _countryDataMapper = data => {
+const _countryCovidDataMapper = data => {
   return {
     country: data.country,
     iso2: data.countryInfo.iso2,
@@ -26,4 +26,17 @@ const _countryDataMapper = data => {
     tests:data.tests,
     population:data.population
   }
+}
+
+export const countryNameMapper = arr => {
+  const result = [];
+  for(let item of arr) {
+    if(item.countryInfo.iso2) {
+      result.push({
+        name: item.country,
+        code: item.countryInfo.iso2
+      });
+    }
+  }
+  return result.sort((a, b) => a.name > b.name ? 1 : -1);
 }

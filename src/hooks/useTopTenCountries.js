@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { TopTenContext } from '../contexts/topTenContext';
 import useCovidApi from './useCovidApi';
 import { countries } from '../constaints';
-import {countryDataMapper} from '../utils/dataMapper';
+import {countryCovideDataMapper} from '../utils/dataMapper';
 
 function useTopTenCountries() {
   const {topTenState, topTenDispatch} = useContext(TopTenContext);
@@ -10,7 +10,7 @@ function useTopTenCountries() {
   useCovidApi(`${countries}?sort=${topTenState.dataKey}`, {
     initialData: [],
     dataRefiner: data => { 
-      topTenDispatch({ type: 'SET_COUNTRY_DATA', payload: countryDataMapper(data.slice(0, 10))});
+      topTenDispatch({ type: 'SET_COUNTRY_DATA', payload: countryCovideDataMapper(data.slice(0, 10))});
     }
   });
 }

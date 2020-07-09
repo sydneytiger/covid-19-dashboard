@@ -7,23 +7,22 @@ import CountriesPieChar from './CountriesPieChar';
 import GlobalStatistic from './GlobalStatistic';
 import HistoryChartsCountry from './HistoryChartsCountry';
 import SearchCountry from './SearchCountry';
-import useLocationApi from '../hooks/useLocationApi';
 import SearchCountryData from './SearchCountryData';
-import { Container, Typography, Grid } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import useWindowDimensions from '../hooks/useWindowDimensions';
-import TopBar from './TopBar';
 import { TopTenContext, topTenReducer, topTenInitState} from '../contexts/topTenContext';
 import { SearchContext, searchReducer, searchInitState} from '../contexts/searchContext';
+import UserCountryCovidData from './UserCountryCovidData';
 
 export function CovidApp() {
   const [topTenState, topTenDispatch] = useReducer(topTenReducer, topTenInitState);
   const [searchState, searchDispatch] = useReducer(searchReducer, searchInitState);
-  
+ 
   const { searchCountry } = searchState;
   const {dataKey, selectedCountry, countryData} = topTenState;
-
+  
   const globalData = useCovidApi(global, { initialData: {}});
-  const userCountry = useLocationApi();
+
   const { width } = useWindowDimensions();
   const countriesChartProps = {
     data: countryData,
@@ -32,7 +31,7 @@ export function CovidApp() {
 
   return (
     <>
-      <TopBar userCountry={userCountry} />
+      <UserCountryCovidData />
       <Container fixed>
         <Typography variant="h4" align="center" style={{ margin:" 20px 0"}}>Covide-19 Statistic</Typography>
         <GlobalStatistic data={globalData} />

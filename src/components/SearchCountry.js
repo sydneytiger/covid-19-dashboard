@@ -4,19 +4,7 @@ import { TextField } from '@material-ui/core';
 import { SearchContext } from '../contexts/searchContext';
 import useCovidApi from '../hooks/useCovidApi';
 import { countries } from '../constaints';
-
-const extracAllCountries = data => {
-  const arr = [];
-  for(let item of data) {
-    if(item.countryInfo.iso2) {
-      arr.push({
-        name: item.country,
-        code: item.countryInfo.iso2
-      });
-    }
-  }
-  return arr.sort((a, b) => a.name > b.name ? 1 : -1);
-}
+import {countryNameMapper} from '../utils/dataMapper';
 
 function SearchCountry() {
   const { searchState, searchDispatch } = useContext(SearchContext);
@@ -25,11 +13,10 @@ function SearchCountry() {
   useCovidApi(countries, {
     initialData: [],
     dataRefiner: data => { 
-      const countries = extracAllCountries(data);
+      const countries = countryNameMapper(data);
       searchDispatch({ type: 'SET_COUNTRY_NAME_LIST', payload: countries });
     }
   });
-
 
   const countryFlag = iso => {
     return typeof String.fromCodePoint !== 'undefined'
