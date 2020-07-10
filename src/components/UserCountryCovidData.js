@@ -37,41 +37,44 @@ function UserCountryCovidData() {
   const [countryList, setCountryList] = useState(null);
 
   useEffect(() => {
-    api(ip_location_url)
-    .then(resp => {
-      loadLocationCovidData(resp.data.country);
-    })
-    .catch(() => {
-      setManualSet(true);
-      loadCountryList();
-    })
-    .finally(() => {
-      setLoading(false);
-    })
-  }, []);
+    async function getLocation() {
+      try{
+        // get user location by ip
+        const resp = await api(ip_location_url);
 
-  const loadLocationCovidData = location => {
-    api(`${countries}${location}`)
-    .then(resp => {
-      setCovidData(countryCovideDataMapper(resp.data));
-    })
-    .finally(() => {
+        // fetch covid data when user country is set
+        await loadLocationCovidData(resp.data.country);
+      } 
+      catch(error) {
+        try{
+          console.log('object')
+          await loadCountryList();
+          setManualSet(true);
+        } catch(error){
+          console.log(`error when load country list ${error}`);
+        }
+      } 
+      finally{
         setLoading(false);
       }
-    );
+    }
+    getLocation();
+  }, []);
+
+  const loadLocationCovidData = async location => {
+    const resp = await api(`${countries}${location}`)
+    setCovidData(countryCovideDataMapper(resp.data));
   }
 
-  const loadCountryList = () => {
-    api(countries)
-    .then(resp => {
-      setCountryList(countryNameMapper(resp.data));
-    });
+  const loadCountryList = async () => {
+    const resp = await api(countries)
+    setCountryList(countryNameMapper(resp.data));
   }
 
-  const handleManualSet = () => {
+  const handleManualSet = async () => {
+    await loadCountryList();
     setManualSet(true);
     setCovidData(null);
-    loadCountryList();
   }
 
   const dataView = data => {
@@ -147,10 +150,11 @@ function UserCountryCovidData() {
             label="Please choose your country"
           />
         )}
-        onChange={(e, val) => {
+        onChange={async (e, val) => {
           setManualSet(false);
           setLoading(true);
-          loadLocationCovidData(val.name)
+          await loadLocationCovidData(val.name);
+          setLoading(false);
         }}/>
     );
   }
