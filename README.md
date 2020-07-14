@@ -31,7 +31,7 @@ User is able to search a country for covide data.
 ### Mertrial UI integration (done)
 Need some advise from an UX colleague, layout and design to make the page more human readable. 
 
-### Display user local country covid data on page top (in progress)
+### Display user local country covid data on page top (done)
 - Display total cases, deaths and today cases, death for user local country. 
 - If the local country cannot be resovled. Let use choose the country from a dropdown. 
 - local country data should be saved in to localstorage.
@@ -39,7 +39,7 @@ Need some advise from an UX colleague, layout and design to make the page more h
 ### Responsive UI implementation
 Adapt the website to tablet and mobile device. Top ten countries barchar(web and tablet device width) and piechar(mobile device width)
 
-### Storybook integration
+### Storybook integration (in progress)
 [https://storybook.js.org/](https://storybook.js.org/)
 
 ### World map integration

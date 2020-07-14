@@ -12,7 +12,7 @@ import { Container, Typography } from '@material-ui/core';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 import { TopTenContext, topTenReducer, topTenInitState} from '../contexts/topTenContext';
 import { SearchContext, searchReducer, searchInitState} from '../contexts/searchContext';
-import UserCountryCovidData from './UserCountryCovidData';
+import UserCountryCovidData from './UserCountryCovideData/UserCountryCovidData';
 
 export function CovidApp() {
   const [topTenState, topTenDispatch] = useReducer(topTenReducer, topTenInitState);

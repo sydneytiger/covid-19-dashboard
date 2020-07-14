@@ -1,21 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import { CircularProgress, Grid, Typography, TextField, AppBar, Tooltip } from '@material-ui/core';
+import { CircularProgress, Grid, Typography, TextField, AppBar } from '@material-ui/core';
 import { makeStyles  } from '@material-ui/core/styles';
 import { Autocomplete } from '@material-ui/lab';
 import MoodBadTwoToneIcon from '@material-ui/icons/MoodBadTwoTone';
 import AirlineSeatFlatTwoToneIcon from '@material-ui/icons/AirlineSeatFlatTwoTone';
 import HelpOutlineTwoToneIcon from '@material-ui/icons/HelpOutlineTwoTone';
 
-import api from '../api/index';
-import { ip_location_url } from '../constaints';
-import { countries } from '../constaints';
-import {countryCovideDataMapper, countryNameMapper} from '../utils/dataMapper';
+import api from '../../api/index';
+import { ip_location_url } from '../../constaints';
+import { countries } from '../../constaints';
+import {countryCovideDataMapper, countryNameMapper} from '../../utils/dataMapper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: 70,
     padding: '10px 0',
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  progress:{
+    margin: 'auto'
   },
   flag: {
     width: 70,
@@ -25,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'fill'
   },
   countryList: {
-    width: 300
+    width: 300,
+    margin: 'auto'
   }
 }));
 
@@ -136,32 +140,32 @@ function UserCountryCovidData() {
 
   const manualSetView = () => {
     return (
-      <Autocomplete
-        className={classes.countryList}
-        id="user-country"
-        options={countryList}
-        autoHighlight
-        freeSolo
-        getOptionLabel={ option => option.name }
-        renderOption={ option => option.name }
-        renderInput={params => (
-          <TextField 
-            {...params}
-            label="Please choose your country"
-          />
-        )}
-        onChange={async (e, val) => {
-          setManualSet(false);
-          setLoading(true);
-          await loadLocationCovidData(val.name);
-          setLoading(false);
-        }}/>
+        <Autocomplete
+          className={classes.countryList}
+          id="user-country"
+          options={countryList}
+          autoHighlight
+          freeSolo
+          getOptionLabel={ option => option.name }
+          renderOption={ option => option.name }
+          renderInput={params => (
+            <TextField 
+              {...params}
+              label="Please let me know where you are?"
+            />
+          )}
+          onChange={async (e, val) => {
+            setManualSet(false);
+            setLoading(true);
+            await loadLocationCovidData(val.name);
+            setLoading(false);
+          }}/>
     );
   }
 
   return (
     <AppBar position="sticky" color="default" className={classes.root}>
-      { loading && <CircularProgress /> }
+      { loading &&  <CircularProgress className={classes.progress} />}
       { manualSet && manualSetView()}
       { covidData && dataView(covidData) }
     </AppBar>
