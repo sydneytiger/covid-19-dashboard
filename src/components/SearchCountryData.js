@@ -1,6 +1,6 @@
 import React from 'react';
 import { countries } from '../constaints';
-import CovidCountryCard from './CovidCountryCard';
+import CovidCountryCard from './CovidCountryCard/CovidCountryCard';
 import useCovidApi from '../hooks/useCovidApi';
 import {countryCovideDataMapper} from '../utils/dataMapper';
 import {Grid} from '@material-ui/core';

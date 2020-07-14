@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
 import useCovidApi from '../hooks/useCovidApi';
-import { global } from '../constaints';
+import { world } from '../constaints';
 import DataKeyDropDown from './DataKeyDropDown';
 import CountriesBarChart from './CountriesBarChart';
 import CountriesPieChar from './CountriesPieChar';
@@ -21,7 +21,7 @@ export function CovidApp() {
   const { searchCountry } = searchState;
   const {dataKey, selectedCountry, countryData} = topTenState;
   
-  const globalData = useCovidApi(global, { initialData: {}});
+  const globalData = useCovidApi(world, { initialData: {}});
 
   const { width } = useWindowDimensions();
   const countriesChartProps = {
