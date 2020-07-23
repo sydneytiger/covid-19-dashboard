@@ -11,7 +11,7 @@ Data source: [https://disease.sh/](https://disease.sh/)
 Implement an axios cahce service using vanilla javascript. Cache the data in either localstorage or sessionstorage.
 
 ### Custom hook (done)
-Make a generic covide api api by using react custom hook.
+Make a generic covid api api by using react custom hook.
 
 ### Rechart integration (done)
 [https://recharts.org/](https://recharts.org/)
@@ -26,7 +26,7 @@ User is able to click on one of the top 10 countires and show three area charts 
 Find out user's locate country by using IP(fall back to google geocode api). And then display the country's coivd data in a card.
 
 ### World countries search (done)
-User is able to search a country for covide data.
+User is able to search a country for covid data.
 
 ### Mertrial UI integration (done)
 Need some advise from an UX colleague, layout and design to make the page more human readable. 
