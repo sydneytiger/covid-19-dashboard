@@ -5,7 +5,7 @@ import MoodBadTwoToneIcon from '@material-ui/icons/MoodBadTwoTone';
 import AirlineSeatFlatTwoToneIcon from '@material-ui/icons/AirlineSeatFlatTwoTone';
 import useCovidApi from '../hooks/useCovidApi';
 import { countries } from '../constaints';
-import {countryCovideDataMapper} from '../utils/dataMapper';
+import {countryCovidDataMapper} from '../utils/dataMapper';
 
 const useStyles = makeStyles({
   root: {
@@ -28,7 +28,7 @@ function TopBar({userCountry}) {
     `${countries}${userCountry}`, 
     { 
       initialData: null,
-      dataRefiner: countryCovideDataMapper
+      dataRefiner: countryCovidDataMapper
     });
 
   return (

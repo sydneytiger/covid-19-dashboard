@@ -38,7 +38,7 @@ it('should render (with enzyme render)', () => {
   expect(wrapper).toMatchSnapshot();
 })
 
-describe('Test CovideCountryCard', () => {
+describe('Test CovidCountryCard', () => {
   let wrapper;
   beforeAll(() => {
     wrapper = shallow(<CovidCountryCard data={testData} />);

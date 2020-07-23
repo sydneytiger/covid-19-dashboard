@@ -1,4 +1,4 @@
-export const countryCovideDataMapper = data => {
+export const countryCovidDataMapper = data => {
   if(!Array.isArray(data)) return _countryCovidDataMapper(data);
   
   const result = [];

@@ -9,7 +9,7 @@ import HelpOutlineTwoToneIcon from '@material-ui/icons/HelpOutlineTwoTone';
 import api from '../../api/index';
 import { ip_location_url } from '../../constaints';
 import { countries } from '../../constaints';
-import {countryCovideDataMapper, countryNameMapper} from '../../utils/dataMapper';
+import {countryCovidDataMapper, countryNameMapper} from '../../utils/dataMapper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,7 +67,7 @@ function UserCountryCovidData() {
 
   const loadLocationCovidData = async location => {
     const resp = await api(`${countries}${location}`)
-    setCovidData(countryCovideDataMapper(resp.data));
+    setCovidData(countryCovidDataMapper(resp.data));
   }
 
   const loadCountryList = async () => {
